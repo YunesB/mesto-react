@@ -1,12 +1,16 @@
 import '../index.css';
 
-function PopupWithImage() {
+function PopupWithImage(props) {
+    console.log(props);
+    const cardData = props.card;
+    console.log(cardData);
+
     return (
-        <div className="popup" id="popupImg">
+        <div className={`popup ${props.isOpen}`} id="popupImg">
           <div className="popup__img-container">
-            <img src="#" className="popup__image"/>
+            <img src={cardData.link} alt={cardData.name} className="popup__image"/>
             <button className="popup__close" type="button" id="popupImgClose"></button>
-            <h3 className="popup__img-subline"></h3>
+            <h3 className="popup__img-subline">{cardData.name}</h3>
           </div>
         </div>
     );

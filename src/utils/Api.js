@@ -1,8 +1,8 @@
 class Api {
     constructor({address, token, cohort}) {
-        this._address = address,
-        this._token = token,
-        this._cohort = cohort
+        this._address = address;
+        this._token = token;
+        this._cohort = cohort;
     }
 
     handleResponse (res) {

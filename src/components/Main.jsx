@@ -44,14 +44,13 @@ function Main(props) {
             </section>
             <section className="elements">
                 <ul className="cards">
-                    {cards.forEach((item) => {
-                        <Card
-                            props={item} 
-                            key={item._id} 
-                            onCardClick={props.onCardClick}
+                    {cards.map((card) => (
+                        <Card 
+                            card={card} 
+                            key={card._id} 
+                            onCardClick={props.onCardClick} 
                         />
-                    }
-                )}
+                    ))}
                 </ul>
             </section>
         </main>

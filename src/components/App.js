@@ -20,7 +20,7 @@ function App() {
     false
   );
 
-  const [cardImage, setCardImageOpen] = React.useState();
+  const [selectedCard, setselectedCardOpen] = React.useState();
 
   // const [isConfirmationPopupOpen, setConfirmationPopupOpen] = React.useState(
   //   false
@@ -42,15 +42,15 @@ function App() {
   //   setConfirmationPopupOpen(true);
   // }
 
-  function handleCardClick() {
-    setCardImageOpen();
+  function handleCardClick(id) {
+    setselectedCardOpen(id);
   }
 
   function closeAllPopups() {
     setEditAvatarPopupOpen(false);
     setEditProfilePopupOpen(false);
     setAddCardPopupOpen(false);
-    // setConfirmationPopupOpen(false);
+    setselectedCardOpen('');
   }
 
 
@@ -149,7 +149,12 @@ function App() {
           isOpen={isConfirmationPopupOpen} 
           onClose={closeAllPopups}
         />       */}
-      </div>
+        <PopupWithImage 
+          isOpen={selectedCard ? 'popup_opened' : ''} 
+          card={selectedCard || ''}
+          onClose={closeAllPopups}
+        />
+      </div> 
   );
 }
 
