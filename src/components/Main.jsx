@@ -1,7 +1,6 @@
-import '../index.css';
 import React from 'react';
 import Card from './Card.jsx';
-import {api} from '../utils/Api.js';
+import {api} from '../utils/api.js';
 
 function Main(props) {
 
