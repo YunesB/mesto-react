@@ -1,6 +1,6 @@
 import '../index.css';
 import React from 'react';
-import loading from '../images/loading.svg'
+// import loading from '../images/loading.svg'
 import Header from './Header.jsx';
 import Main from './Main.jsx';
 import Footer from './Footer.jsx';
@@ -51,6 +51,7 @@ function App() {
     setEditProfilePopupOpen(false);
     setAddCardPopupOpen(false);
     setselectedCardOpen('');
+    console.log(selectedCard);
   }
 
 
