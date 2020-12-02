@@ -1,3 +1,5 @@
+// по идее я его переименовал, я не знаю, почему он с большой буквы пушится
+
 class Api {
     constructor({address, token, cohort}) {
         this._address = address;
