@@ -1,5 +1,3 @@
-// по идее я его переименовал, я не знаю, почему он с большой буквы пушится
-
 class Api {
     constructor({address, token, cohort}) {
         this._address = address;
@@ -51,12 +49,9 @@ class Api {
               'Content-Type': 'application/json'
           }
       })
-      .then(res => {
-          if(res.ok) {
-              return res.json();
-          }
-          return Promise.reject(`Ошибка: ${res.status} - ${res.statusText}`);
-          })
+      .then((res) =>
+          this.handleResponse(res)
+      )
     }
 
     getUserInfo() {
@@ -107,32 +102,32 @@ class Api {
       )
     }
 
-    postLike(card) {
-      return fetch(`${this._address}/${this._cohort}/cards/likes/${card._id}`, 
-      {
-          method: 'PUT',
-          headers: {
-            authorization: this._token,
-            'Content-Type': 'application/json'
-          }
-      })
-      .then((res) =>
-          this.handleResponse(res)
-      )
-    }
-
-    removeLike(card) {
-      return fetch(`${this._address}/${this._cohort}/cards/likes/${card._id}`, 
-      {
-          method: 'DELETE',
-          headers: {
-            authorization: this._token,
-            'Content-Type': 'application/json'
-          }
-      })
-      .then((res) =>
-          this.handleResponse(res)
-      )
+    changeLikeCardStatus(card, isLiked) {
+      if (isLiked) {
+          return fetch(`${this._address}/${this._cohort}/cards/likes/${card._id}`, 
+          {
+              method: 'PUT',
+              headers: {
+                authorization: this._token,
+                'Content-Type': 'application/json'
+              }
+          })
+          .then((res) =>
+              this.handleResponse(res)
+          )
+      } else {
+          return fetch(`${this._address}/${this._cohort}/cards/likes/${card._id}`, 
+          {
+              method: 'DELETE',
+              headers: {
+                authorization: this._token,
+                'Content-Type': 'application/json'
+              }
+          })
+          .then((res) =>
+              this.handleResponse(res)
+          )
+      }
     }
 }
 
