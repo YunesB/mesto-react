@@ -67,7 +67,7 @@ class Api {
       )
     }
     
-    setUserInfo(name, info) {
+    setUserInfo(data) {
       return fetch(`${this._address}/${this._cohort}/users/me`, 
       {
           method: 'PATCH',
@@ -75,10 +75,7 @@ class Api {
             authorization: this._token,
             'Content-Type': 'application/json'
           },
-          body: JSON.stringify({
-            name: name,
-            about: info
-          })
+          body: JSON.stringify(data)
       })
       .then((res) =>
           this.handleResponse(res)
@@ -93,9 +90,7 @@ class Api {
             authorization: this._token,
             'Content-Type': 'application/json'
           },
-          body: JSON.stringify({
-            avatar: data
-          })
+          body: JSON.stringify(data)
       })
       .then((res) =>
           this.handleResponse(res)

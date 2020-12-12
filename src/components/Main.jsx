@@ -1,8 +1,7 @@
 import React from 'react';
 import Card from './Card.jsx';
+import loading from '../images/loading.svg';
 import { CurrentUserContext } from '../contexts/CurrentUserContext.jsx';
-// import {api} from '../utils/api.js';
-import loading from '../images/loading.svg'
 
 function Main(props) {
 
