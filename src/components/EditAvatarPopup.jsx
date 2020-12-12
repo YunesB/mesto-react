@@ -12,6 +12,10 @@ function EditAvatarPopup(props) {
         });
     }
 
+    React.useEffect(() => {
+      avatarRef.current.value = '';
+    })
+
     return (
         <PopupWithForm 
             isOpen={props.isOpen ? "popup_opened" : ""}
@@ -30,7 +34,6 @@ function EditAvatarPopup(props) {
                     name="link" placeholder="Ссылка на картинку" required
                     id="url-input"
                     ref={avatarRef}
-                    // value={props.isOpen ? props.emptyField : avatarRef}
                   />
                   <span className="popup__error" id="url-input-error"></span>
                 </label>

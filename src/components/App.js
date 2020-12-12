@@ -24,7 +24,6 @@ function App() {
 
   const [currentUser, setCurrentUser] = React.useState({});
   const [cards, setCards] = React.useState([]);
-  // const [emptyField, setEmptyField] = React.useState('');
 
   React.useEffect(() => {
     Promise.all([
@@ -39,10 +38,6 @@ function App() {
             setIsPageLoading(false);
           })
   }, []);
-
-  // const emptyInput = React.useEffect(() => {
-  //   setEmptyField('');
-  // }, []);
 
   function handleUpdateUser(user) {
     setIsPageLoading(true);
@@ -68,7 +63,6 @@ function App() {
   }
 
   function handleAddCardSubmit(data) {
-    console.log(data);
     setIsPageLoading(true);
     api.addCard(data)
       .then((data) => {
@@ -153,7 +147,6 @@ function App() {
             isOpen={isEditAvatarPopupOpen} 
             onClose={closeAllPopups}
             onUpdateUser={handleUpdateAvatar}
-            // emptyField={emptyField}
           />
           {/* <PopupWithForm 
             name="popupConfirm" 
