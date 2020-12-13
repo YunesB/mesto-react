@@ -18,7 +18,7 @@ function Main(props) {
                     </div>
                     <div className="profile-info__container">
                         <div className="profile-info__name-box">
-                            <h1 className="profile-info__name">{currentUser.name || ''}</h1>
+                            <h1 className="profile-info__name">{currentUser.name || 'Загрузка данных...'}</h1>
                             <button type="button" className="profile-info__customization" onClick={props.onEditProfile}></button>
                         </div>
                         <p className="profile-info__job">{currentUser.about || ''}</p>

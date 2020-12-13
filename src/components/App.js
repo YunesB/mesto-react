@@ -3,6 +3,7 @@ import Header from './Header.jsx';
 import Main from './Main.jsx';
 import Footer from './Footer.jsx';
 
+import ConfirmationPopup from './ConfirmationPopup.jsx';
 import EditProfilePopup from './EditProfilePopup.jsx';
 import EditAvatarPopup from './EditAvatarPopup.jsx';
 import AddPlacePopup from './AddPlacePopup.jsx';
@@ -20,10 +21,11 @@ function App() {
   const [isEditProfilePopupOpen, setEditProfilePopupOpen] = React.useState(false);
   const [isAddCardPopupOpen, setAddCardPopupOpen] = React.useState(false);
   const [selectedCard, setSelectedCardOpen] = React.useState();
-  // const [isConfirmationPopupOpen, setConfirmationPopupOpen] = React.useState(false);
+  const [isConfirmationPopupOpen, setConfirmationPopupOpen] = React.useState(false);
 
   const [currentUser, setCurrentUser] = React.useState({});
   const [cards, setCards] = React.useState([]);
+  let [currentCard, setCurrentCard] = React.useState({});
 
   React.useEffect(() => {
     Promise.all([
@@ -52,7 +54,6 @@ function App() {
 
   function handleUpdateAvatar(user) {
     setIsPageLoading(true);
-    // emptyInput();
     api.setUserAva(user)
       .then((user) => 
         setCurrentUser(user))
@@ -80,12 +81,14 @@ function App() {
       .then((newCard) => {
         const newCards = cards.map((c) => c._id === card._id ? newCard : c);
         setCards(newCards);
-      });
+      })
+      .catch((err) => 
+        console.log(err));
   }
 
-  function handleCardDelete(card) {
-    // setConfirmationPopupOpen(true);
+  function handleDeletePopup(card) {
     setIsPageLoading(true);
+    currentCard = card;
     api.deleteCard(card._id)
       .then(() => {
         const newCards = cards.filter((c) => c._id !== card._id);
@@ -93,6 +96,11 @@ function App() {
       })
       .catch((err) => console.log(err))
       .finally(() => closeAllPopups());
+  }
+
+  function handleCardDelete(card) {
+    setConfirmationPopupOpen(true);
+    setCurrentCard(card);
   }
 
   function handleEditAvatarClick() {
@@ -116,6 +124,7 @@ function App() {
     setEditProfilePopupOpen(false);
     setAddCardPopupOpen(false);
     setIsPageLoading(false);
+    setConfirmationPopupOpen(false);
     setSelectedCardOpen();
   }
 
@@ -147,19 +156,18 @@ function App() {
             isOpen={isEditAvatarPopupOpen} 
             onClose={closeAllPopups}
             onUpdateUser={handleUpdateAvatar}
-          />
-          {/* <PopupWithForm 
-            name="popupConfirm" 
-            title="Вы уверены?" 
-            buttonName="Да" 
-            isOpen={isConfirmationPopupOpen} 
-            onClose={closeAllPopups}
-          />       */}
+          />    
           <ImagePopup 
             isOpen={selectedCard ? 'popup_opened' : ''} 
             card={selectedCard || ''}
             onClose={closeAllPopups}
           />
+          <ConfirmationPopup 
+            isOpen={isConfirmationPopupOpen} 
+            onClose={closeAllPopups}
+            onConfirm={handleDeletePopup}
+            card={currentCard}
+          /> 
           <PageIsLoading 
             isOpen={isPageLoading}
           />

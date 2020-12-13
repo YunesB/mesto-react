@@ -30,9 +30,7 @@ function AddPlacePopup(props) {
             onSubmit={handleSubmit}
             name="popupFormCard" 
             title="Новое место" 
-            buttonName="Создать" 
-            children = {
-              <>
+            buttonName="Создать">
                 <label className="popup__field">
                   <input 
                     minLength="2" 
@@ -57,9 +55,7 @@ function AddPlacePopup(props) {
                   />
                   <span className="popup__error" id="url-input-error"></span>
                 </label>
-              </>
-            }
-        />
+        </PopupWithForm>
     );
 }
 
